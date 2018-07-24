@@ -8,4 +8,3 @@ tony.add_occupation(occupations.Recruit())
 tony.add_occupation(occupations.Veteran())
 
 tony.print_attributes()
-tony.print_skills()
