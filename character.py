@@ -1,5 +1,5 @@
 class Character:
-    """ to do"""
+    """ """
 
     # Initializer
     def __init__(self, name, gender, family):
