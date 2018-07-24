@@ -99,10 +99,10 @@ class Character:
 
     # Character description
     def describe(self):
-        return "{} is a {} year old {} from a {} family.".format(self.name,
-                                                                 self.age,
-                                                                 self.gender,
-                                                                 self.family)
+        print("{} is a {} year old {} from a {} family.".format(self.name,
+                                                                self.age,
+                                                                self.gender,
+                                                                self.family))
 
     def print_occupations(self):
         for occupation in self.occupations:
