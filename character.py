@@ -1,3 +1,5 @@
+from orderedcounter import OrderedCounter
+
 class Character:
     """ to do"""
 
@@ -15,7 +17,7 @@ class Character:
         self.recipes = []
         self.attributes = {}
         self.skills = {}
-        self.inv = {}
+        self.inv = OrderedCounter()
 
         if self.gender == 'male':
             self.attributes = {'End': 13, 'Str': 16, 'Agl': 12,
@@ -111,14 +113,16 @@ class Character:
     def add_occupation(self, occupation):
         self.mod_age(5)
         self.occupations.append(occupation.name)
+        self.inv.clear()
+
+        for item in occupation.items:
+            self.inv[item] += 1
+
         for k, v in self.attributes.items():
-            for dk, dv in occupation.dattributes.items():
-                if k == dk:
-                    self.attributes[k] += dv
+            self.attributes[k] += occupation.dattributes[k]
 
         for k, v in self.skills.items():
-            for dk, dv in occupation.dskills.items():
-                self.skills[k] += dv
+            self.skills[k] += occupation.dskills[k]
 
     # prints all attribute values
     def print_attributes(self):
@@ -190,7 +194,7 @@ class Character:
     # prints all items in inv
     def print_inv(self):
         for k, v in self.inv.items():
-            print(k, v)
+            print(k.name, v)
 
     # add saint to character
     def add_saint(self, saint):

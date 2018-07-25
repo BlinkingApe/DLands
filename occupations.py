@@ -1,11 +1,13 @@
+from items import Shortsword25
+
 class Occupation:
 
     # Initialize
-    def __init__(self, name, dattributes, dskills):
+    def __init__(self, name, dattributes, dskills, items):
         self.name = name
         self.dattributes = dattributes
         self.dskills = dskills
-
+        self.items = items
 
 class Recruit(Occupation):
 
@@ -19,7 +21,8 @@ class Recruit(Occupation):
                                   'wMsD': 6, 'Alch': 0, 'Relg': 0,
                                   'Virt': 0, 'SpkC': 1, 'SpkL': 0,
                                   'R&W': 0, 'Heal': 1, 'Artf': 0,
-                                  'Stlh': 1, 'StrW': 1, 'Ride': 1, 'WdWs': 1})
+                                  'Stlh': 1, 'StrW': 1, 'Ride': 1, 'WdWs': 1},
+                         items=[Shortsword25()])
 
 
 class Soldier(Occupation):
@@ -33,7 +36,8 @@ class Soldier(Occupation):
                                   'wMsD': 3, 'Alch': 0, 'Relg': 1,
                                   'Virt': 1, 'SpkC': 1, 'SpkL': 0,
                                   'R&W': 0, 'Heal': 2, 'Artf': 1,
-                                  'Stlh': 2, 'StrW': 1, 'Ride': 1, 'WdWs': 3})
+                                  'Stlh': 2, 'StrW': 1, 'Ride': 1, 'WdWs': 3},
+                         items=[Shortsword25()])
 
 
 class Veteran(Occupation):
@@ -47,4 +51,5 @@ class Veteran(Occupation):
                                   'wMsD': 2, 'Alch': 0, 'Relg': 1,
                                   'Virt': 1, 'SpkC': 2, 'SpkL': 0,
                                   'R&W': 1, 'Heal': 2, 'Artf': 1,
-                                  'Stlh': 2, 'StrW': 2, 'Ride': 2, 'WdWs': 2})
+                                  'Stlh': 2, 'StrW': 2, 'Ride': 2, 'WdWs': 2},
+                         items=[Shortsword25()]         )
