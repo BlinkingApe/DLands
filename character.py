@@ -1,5 +1,8 @@
 from orderedcounter import OrderedCounter
 
+import occupations
+
+
 class Character:
     """ to do"""
 

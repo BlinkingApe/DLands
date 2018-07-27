@@ -1,10 +1,8 @@
-from orderedcounter import OrderedCounter
-from character import Character
+import character
 import occupations
-import items
 
 def test_create_character():  # tests character creation
-    tony = Character('Tony', 'male', 'noble')
+    tony = character.Character('Tony', 'male', 'noble')
     assert tony.attributes == {'End': 13, 'Str': 16, 'Agl': 12,
                                'Per': 13, 'Int': 12, 'Chr': 12,
                                'DF': 0, 'EP': 89}
@@ -18,24 +16,26 @@ def test_create_character():  # tests character creation
     return tony
 
 
-def test_veteran_occupation():  # tests veteran occupation
-    tony = Character('Tony', 'male', 'noble')
-    tony.add_occupation(occupations.Veteran())
-    assert tony.attributes == {'End': 14, 'Str': 17, 'Agl': 12,
-                               'Per': 13, 'Int': 12, 'Chr': 11,
-                               'DF': 0, 'EP': 110}
-    assert tony.skills == {'wEdg': 8, 'wImp': 6, 'wFll': 2, 'wPol': 6,
-                           'wThr': 1, 'wBow': 5, 'wMsD': 2, 'Alch': 2,
-                           'Relg': 6, 'Virt': 3, 'SpkC': 6, 'SpkL': 2,
-                           'R&W': 3, 'Heal': 2, 'Artf': 1, 'Stlh': 3,
-                           'StrW': 2, 'Ride': 5, 'WdWs': 3}
+def test_occupation(occupation):  # tests veteran occupation
+    tony = character.Character('Tony', 'male', 'noble')
+
+    tony.add_occupation(occupation)
+    tony.print_occupations()
+    print('***********')
+    tony.print_attributes()
+    print('***********')
+    tony.print_skills()
+    print('***********')
     tony.print_inv()
-#def test_inventory():  # tests player inventory
-    
+
+
+
+
 
 #def test_create_interaction():  # tests interaction creation
     #ia0_koln_gate = Interaction(name)
 
 test_create_character()         # test suite
-test_veteran_occupation()
+test_occupation(occupations.Veteran())
+test_occupation(occupations.Soldier())
 #test_create_interaction()

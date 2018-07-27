@@ -1,4 +1,5 @@
-from items import Shortsword25
+import items
+
 
 class Occupation:
 
@@ -8,6 +9,7 @@ class Occupation:
         self.dattributes = dattributes
         self.dskills = dskills
         self.items = items
+
 
 class Recruit(Occupation):
 
@@ -22,7 +24,7 @@ class Recruit(Occupation):
                                   'Virt': 0, 'SpkC': 1, 'SpkL': 0,
                                   'R&W': 0, 'Heal': 1, 'Artf': 0,
                                   'Stlh': 1, 'StrW': 1, 'Ride': 1, 'WdWs': 1},
-                         items=[Shortsword25()])
+                         items=[items.VCuirbouilli(), items.LLeather()])
 
 
 class Soldier(Occupation):
@@ -37,7 +39,7 @@ class Soldier(Occupation):
                                   'Virt': 1, 'SpkC': 1, 'SpkL': 0,
                                   'R&W': 0, 'Heal': 2, 'Artf': 1,
                                   'Stlh': 2, 'StrW': 1, 'Ride': 1, 'WdWs': 3},
-                         items=[Shortsword25()])
+                         items=[items.VChainmail(), items.LSLeather()])
 
 
 class Veteran(Occupation):
@@ -52,4 +54,4 @@ class Veteran(Occupation):
                                   'Virt': 1, 'SpkC': 2, 'SpkL': 0,
                                   'R&W': 1, 'Heal': 2, 'Artf': 1,
                                   'Stlh': 2, 'StrW': 2, 'Ride': 2, 'WdWs': 2},
-                         items=[Shortsword25()]         )
+                         items=[items.VBrigandine(), items.LCuirbouilli()])
