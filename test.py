@@ -31,11 +31,5 @@ def test_occupation(occupation):  # tests veteran occupation
 
 
 
+tony = character.Character('Tony', 'male', 'noble')
 
-#def test_create_interaction():  # tests interaction creation
-    #ia0_koln_gate = Interaction(name)
-
-test_create_character()         # test suite
-test_occupation(occupations.Veteran())
-test_occupation(occupations.Soldier())
-#test_create_interaction()

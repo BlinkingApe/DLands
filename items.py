@@ -150,7 +150,7 @@ class Shortsword(Weapon):
     def __init__(self):
         super().__init__(name='Shortsword', quality=25, rarity=5, price=170,
                          speed=40, pen=4, dmg=8, skill=16, strength=13,
-                         wgt=3, skill='WEdg')
+                         wgt=3)
 
 
 class Club(Weapon):

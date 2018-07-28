@@ -2,6 +2,8 @@ from orderedcounter import OrderedCounter
 
 import occupations
 
+import items
+
 
 class Character:
     """ to do"""
@@ -15,23 +17,23 @@ class Character:
         self.age = 15
         self.gender = gender
         self.family = family
-        self.occupations = []
-        self.saints = []
-        self.recipes = []
-        self.attributes = {}
-        self.skills = {}
-        self.inv = OrderedCounter()
+        self.occupations = []  # list of held occupations
+        self.saints = []  # list of known saints
+        self.recipes = []  # list of known recipes
+        self.attributes = {}  # dict of attributes
+        self.skills = {}  # dict of skills
+        self.inv = OrderedCounter()  # inventory of items
 
-        if self.gender == 'male':
+        if self.gender == 'male':  # give default male attributes
             self.attributes = {'End': 13, 'Str': 16, 'Agl': 12,
                                'Per': 13, 'Int': 12, 'Chr': 12,
                                'DF': 0, 'EP': 0}
-        else:
+        else:  # give default female attributes
             self.attributes = {'End': 15, 'Str': 13, 'Agl': 12,
                                'Per': 13, 'Int': 12, 'Chr': 13,
                                'DF': 0, 'EP': 0}
 
-        if self.family == 'noble':
+        if self.family == 'noble':  # give family attributes and skills
             self.mod_attribute('EP', 89)
 
             self.skills = {'wEdg': 5, 'wImp': 4, 'wFll': 1, 'wPol': 4,
@@ -109,23 +111,36 @@ class Character:
                                                                 self.gender,
                                                                 self.family))
 
+    # prints list of occupations
     def print_occupations(self):
         for occupation in self.occupations:
             print(occupation)
 
+    # adds new occupation
     def add_occupation(self, occupation):
-        self.mod_age(5)
-        self.occupations.append(occupation.name)
-        self.inv.clear()
 
-        for item in occupation.items:
+        self.mod_age(5)  # advance age by 5 years
+        self.occupations.append(occupation.name)  # add occupation to list
+        self.inv.clear()  # clear any previous inventory
+
+        for item in occupation.items:  # give occupation items
             self.inv[item] += 1
 
-        for k, v in self.attributes.items():
+        for k, v in self.attributes.items():  # apply occupation attributes
             self.attributes[k] += occupation.dattributes[k]
 
-        for k, v in self.skills.items():
+        for k, v in self.skills.items():  # apply occupation skills
             self.skills[k] += occupation.dskills[k]
+
+        if len(self.occupations) == 1: # add bonus if first occupation
+            self.mod_attribute('EP', 20)
+            for k, v in self.skills.items():
+                self.mod_skill(k, 2)
+
+        if len(self.occupations) == 2:  # add bonus if second occupation
+            self.mod_attribute('EP', 5)
+
+        self.add_weapon()  # add weapon from highest weapon skill class
 
     # prints all attribute values
     def print_attributes(self):
@@ -173,6 +188,61 @@ class Character:
     def mod_age(self, dage):
         self.age += dage
 
+        if self.age == 30:
+            self.mod_attribute('End', -1)
+            self.mod_attribute('Str', -1)
+            self.mod_attribute('Agl', -1)
+
+        if self.age == 35:
+            self.mod_attribute('End', -2)
+            self.mod_attribute('Str', -1)
+            self.mod_attribute('Agl', -2)
+
+        if self.age == 40:
+            self.mod_attribute('End', -2)
+            self.mod_attribute('Str', -2)
+            self.mod_attribute('Agl', -2)
+
+        if self.age == 45:
+            self.mod_attribute('End', -3)
+            self.mod_attribute('Str', -2)
+            self.mod_attribute('Agl', -2)
+            self.mod_attribute('Per', -1)
+            self.mod_attribute('Int', 0)
+            self.mod_attribute('Chr', -1)
+
+        if self.age == 50:
+            self.mod_attribute('End', -3)
+            self.mod_attribute('Str', -2)
+            self.mod_attribute('Agl', -3)
+            self.mod_attribute('Per', -1)
+            self.mod_attribute('Int', 0)
+            self.mod_attribute('Chr', -1)
+
+        if self.age == 55:
+            self.mod_attribute('End', -3)
+            self.mod_attribute('Str', -3)
+            self.mod_attribute('Agl', -3)
+            self.mod_attribute('Per', -2)
+            self.mod_attribute('Int', -1)
+            self.mod_attribute('Chr', -2)
+
+        if self.age == 60:
+            self.mod_attribute('End', -5)
+            self.mod_attribute('Str', -4)
+            self.mod_attribute('Agl', -4)
+            self.mod_attribute('Per', -3)
+            self.mod_attribute('Int', -2)
+            self.mod_attribute('Chr', -3)
+
+        if self.age == 65:
+            self.mod_attribute('End', -6)
+            self.mod_attribute('Str', -6)
+            self.mod_attribute('Agl', -4)
+            self.mod_attribute('Per', -3)
+            self.mod_attribute('Int', -2)
+            self.mod_attribute('Chr', -3)
+
     # change gender
     def change_gender(self, gender):
         self.gender = gender
@@ -185,6 +255,39 @@ class Character:
 
         self.inv[item] += amount
 
+
+    # returns best weapon skill
+
+    def add_weapon(self):
+        weapon_skills = {'wEdg': 0, 'wImp': 0, 'wFll': 0, 'wPol': 0,
+                         'wThr': 0, 'wBow': 0, 'wMsD': 0}
+
+        for k,v in weapon_skills.items():
+            weapon_skills[k] = self.skills[k]
+            
+
+        max_skill = max(weapon_skills.keys(), key=lambda k: weapon_skills[k])
+
+        if max_skill == 'wEdg':
+            self.add_item(items.Shortsword(), 1)
+
+        if max_skill == 'wImp':
+            self.add_item(items.Club(), 1)
+
+        if max_skill == 'wFll':
+            self.add_item(items.MFlail(), 1)
+
+        if max_skill == 'wPol':
+            self.add_item(items.TKnife(), 1)
+
+        if max_skill == 'wBow':
+            self.add_item(items.SBow(), 1)
+
+        if max_skill == 'wMsD':
+            self.add_item(items.Crossbow(), 1)
+
+
+    
     # remove item from inv
     def remove_item(self, item, amount):
         if item not in self.inv:
