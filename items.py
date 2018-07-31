@@ -106,15 +106,17 @@ class LCuirbouilli(Armor):
 class VSLeather(Armor):
 
     def __init__(self):
-        super().__init__(name='Studded Leather', quality=25, rarity=3, price=330,
-                         area='Vitals', armor='Nonmetal', thick=2, wgt=8)
+        super().__init__(name='Studded Leather', quality=25, rarity=3,
+                         price=330, area='Vitals', armor='Nonmetal',
+                         thick=2, wgt=8)
 
 
 class LSLeather(Armor):
 
     def __init__(self):
-        super().__init__(name='Studded Leather', quality=25, rarity=4, price=370,
-                         area='Lower', armor='Nonmetal', thick=2, wgt=10)
+        super().__init__(name='Studded Leather', quality=25, rarity=4,
+                         price=370, area='Lower', armor='Nonmetal',
+                         thick=2, wgt=10)
 
 
 class VLeather(Armor):
@@ -164,9 +166,9 @@ class Club(Weapon):
 class MFlail(Weapon):
 
     def __init__(self):
-        super().__init__(name='Military flail', quality=25, rarity=6, price=160,
-                         speed=70, pen=4, dmg=10, skill=14, strength=17,
-                         wgt=4)
+        super().__init__(name='Military flail', quality=25, rarity=6,
+                         price=160, speed=70, pen=4, dmg=10, skill=14,
+                         strength=17, wgt=4)
 
 
 class SSpear(Weapon):

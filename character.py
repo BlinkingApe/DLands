@@ -132,7 +132,7 @@ class Character:
         for k, v in self.skills.items():  # apply occupation skills
             self.skills[k] += occupation.dskills[k]
 
-        if len(self.occupations) == 1: # add bonus if first occupation
+        if len(self.occupations) == 1:  # add bonus if first occupation
             self.mod_attribute('EP', 20)
             for k, v in self.skills.items():
                 self.mod_skill(k, 2)
@@ -255,16 +255,14 @@ class Character:
 
         self.inv[item] += amount
 
-
     # returns best weapon skill
 
     def add_weapon(self):
         weapon_skills = {'wEdg': 0, 'wImp': 0, 'wFll': 0, 'wPol': 0,
                          'wThr': 0, 'wBow': 0, 'wMsD': 0}
 
-        for k,v in weapon_skills.items():
+        for k, v in weapon_skills.items():
             weapon_skills[k] = self.skills[k]
-            
 
         max_skill = max(weapon_skills.keys(), key=lambda k: weapon_skills[k])
 
@@ -286,8 +284,6 @@ class Character:
         if max_skill == 'wMsD':
             self.add_item(items.Crossbow(), 1)
 
-
-    
     # remove item from inv
     def remove_item(self, item, amount):
         if item not in self.inv:
